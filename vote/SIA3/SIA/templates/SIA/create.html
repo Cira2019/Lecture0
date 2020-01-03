@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+{% extends 'SIA/base.html' %}
+{% block body %}
+<form method='post'>
+    {% csrf_token %}
+    <p>Select a country: {{activityform.country}}</p>
+    <p>Which year is the SIA? {{activityform.year}}</p>
+    <p>Is this a phased campaign? {{activityform.phased_yesno}}</p>
+    <p hidden="hidden" id="phase_total">How many phases in total? {{activityform.phase_total}}</p>
+
+<p>Select the interventions, and their respective activity type, extent, and status</p>
+<div class='col-8'></div>
+{{ AIformset.management_form }}
+        {% for activityinterventionform in AIformset %}
+<div class="row form-row spacer">
+    <!-- <div class="col-2">
+        <label>{{form.name.label}}</label>
+    </div> -->
+    <div class="col-8">
+        <div class="input-group">
+        {{activityinterventionform}}
+            <div class="input-group-append">
+                <button class="btn btn-success add-form-row">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{{ PhaseFormset.management_form }}
+        {% for phase in PhaseFormset %}
+<div class="row form-row spacer">
+    <!-- <div class="col-2">
+        <label>{{form.name.label}}</label>
+    </div> -->
+    <div class="col-8">
+        <div class="input-group">
+        {{phase}}
+            <div class="input-group-append">
+                <button class="btn btn-success add-form-row">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+    
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+$( "#phased_yesno" ).bind("change focus",function() {
+  if ($(this).val()==1){
+    $('#phase_total').removeAttr('hidden');
+  } else if ($(this).val()==2 or $(this).val()==3){
+     $('#phase_total').attr('hidden','hidden');
+  }
+});
+
+// $( "#phased_yesno" ).focus(function() {
+//   if ($(this).val()==1){
+//      $('#phase_total').removeAttr('hidden');
+//   } else if ($(this).val()==2){
+//       $('#phase_total').attr('hidden','hidden');
+//   }
+// });
+// $('#phase_total').change(function(){
+    
+// })
+var $("#phase_total")
+
+</script>   
+{% endblock %}

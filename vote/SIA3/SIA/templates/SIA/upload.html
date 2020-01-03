@@ -1,0 +1,27 @@
+{% extends 'SIA/base.html' %}
+
+
+
+{% block body %}
+
+{% if messages %}
+	{% for message in messages %}
+	<div>{{message|safe}}</div>
+	{% endfor %}
+{% else %}
+
+<h2>Upload reference place data
+</h2>
+<!-- <h3>{{order}}</h3>
+ -->
+ <form method='post' enctype="multipart/form-data">
+	{% csrf_token %}
+<!-- 	<input type='file' name='ref_place'>
+ -->	<input type='file' name='country'>
+	<button type='submit'>Upload file</button>
+</form>
+
+
+{% endif %}
+
+{% endblock %}
