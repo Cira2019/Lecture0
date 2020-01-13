@@ -1,5 +1,5 @@
 from django.db import models
-#from partial_date import PartialDateField #has a problem with a package six.
+#from partial_date import PartialDateField #has a problem with a package called six
 
 
 class Country(models.Model):
@@ -30,7 +30,6 @@ class Activity_type(models.Model):
 	intervention=models.ManyToManyField(Intervention,blank=True,related_name="activity_types")
 	def __str__(self):
 		return f"{self.activity_type}"
-
 
 ##to be decided
 class Age(models.Model):
@@ -123,7 +122,7 @@ class Activity_intervention(models.Model):
 	intervention=models.ForeignKey(Intervention,null=True,blank=True,on_delete=models.SET_NULL,related_name="activity_interventions")
 	activity_type=models.ForeignKey(Activity_type,null=True,blank=True,on_delete=models.SET_NULL,related_name="activity_interventions")
 	extent=models.ForeignKey(Extent,null=True,blank=True,on_delete=models.SET_NULL,related_name="activity_interventions")
-	activity_status=models.ForeignKey(Status,null=True,blank=True,on_delete=models.SET_NULL,related_name="activity_interventions")
+	#activity_status=models.ForeignKey(Status,null=True,blank=True,on_delete=models.SET_NULL,related_name="activity_interventions")
 	activity=models.ForeignKey(Activity,null=True,blank=True,on_delete=models.SET_NULL,related_name="activity_interventions")
 	# def __str__(self):
 	# 	return f"{self.activity.activity_name} {self.intervention} {self.extent}"

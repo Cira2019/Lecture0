@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import *
 import csv,io
 from django.http import HttpResponse
+from dal import autocomplete
 
 # Create your views here.
 def create(request):
@@ -48,3 +49,17 @@ def upload(request):
 			UNICEF_region=column[3],
 			)
 	return HttpResponse("Success")
+
+
+class CountryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Country.objects.none()
+
+        qs = Country.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs

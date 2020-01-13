@@ -21,9 +21,9 @@ class Sub_activityForm(ModelForm):
 class Activity_interventionForm(ModelForm):
 	class Meta:
 		model=Activity_intervention
-		fields=['intervention','activity_type','extent','activity_status']
+		fields=['intervention','activity_type','extent']
 		labels={
-		'intervention':'','activity_type':'','extent':'','activity_status':''
+		'intervention':'','activity_type':'','extent':''
 		}
 
 Activity_interventionFormSet=formset_factory(Activity_interventionForm,extra=1)
